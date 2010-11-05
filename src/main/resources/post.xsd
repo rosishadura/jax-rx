@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!--
+		xmlns="http://jax-rx.sourceforge.net"
+		targetNamespace="http://jax-rx.sourceforge.net"
+	-->
+
+	<!-- allowed root elements: query, run and command -->
+	<xs:element name="query">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="text" />
+        <xs:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="variable" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="output" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="run">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="text" />
+				<xs:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="command">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="text" />
+				<xs:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="text" type="xs:string" />
+
+	<xs:element name="parameter">
+		<xs:complexType>
+			<xs:attribute name="name" type="names" use="required" />
+			<xs:attribute name="value" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+  <xs:element name="variable">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="value" type="xs:string" use="required" />
+      <xs:attribute name="type" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="output">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="value" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+	<!--
+		allowed parameters, as defined by the QueryParameter enumeration
+	-->
+	<xs:simpleType name="names">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="revision" />
+			<xs:enumeration value="output" />
+			<xs:enumeration value="xsl" />
+			<xs:enumeration value="wrap" />
+			<xs:enumeration value="start" />
+			<xs:enumeration value="count" />
+			<xs:enumeration value="var" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
