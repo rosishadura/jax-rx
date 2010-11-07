@@ -38,7 +38,7 @@ public final class ResourcePath {
     resource = rp.length == 1 && rp[0].isEmpty() ? new String[] { } : rp;
     params = queryParameters;
   }
-  
+
   /**
    * Returns the complete resource path string.
    * @return resource path string

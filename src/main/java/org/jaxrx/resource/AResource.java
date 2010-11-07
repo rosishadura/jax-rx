@@ -120,7 +120,7 @@ abstract class AResource {
 	 * Extracts and returns query parameters, variables, and output options
 	 * from the specified document instance. The names, values, and optional
 	 * data types of variables are separated with the special character code
-	 * {@code '\2'}. 
+	 * {@code '\2'}.
 	 *
 	 * @param doc
 	 *            The XML {@link Document} containing the XQuery XML post
