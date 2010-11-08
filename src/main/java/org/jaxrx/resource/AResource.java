@@ -164,7 +164,7 @@ abstract class AResource {
     for (int i = 0; i < props.getLength(); i++) {
       final NamedNodeMap nnm = props.item(i).getAttributes();
       // use \2 as delimiter for keys, values, and optional data types
-      String val = nnm.getNamedItem("name").getNodeValue() + '=' +
+      final String val = nnm.getNamedItem("name").getNodeValue() + '=' +
                    nnm.getNamedItem("value").getNodeValue();
       addParameter("output", val, newParams, impl);
     }
