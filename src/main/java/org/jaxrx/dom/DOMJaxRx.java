@@ -46,7 +46,7 @@ public final class DOMJaxRx implements JaxRx {
 	}
 
 	@Override
-	public StreamingOutput get(final ResourcePath path) {
+	public synchronized StreamingOutput get(final ResourcePath path) {
 		StreamingOutput sOutput = null;
 		if (path.getDepth() == 0) {
 			final Set<String> docNames = DOMs.getAllDOMs();
@@ -67,7 +67,7 @@ public final class DOMJaxRx implements JaxRx {
 	}
 
 	@Override
-	public StreamingOutput query(final String query, final ResourcePath path) {
+	public synchronized StreamingOutput query(final String query, final ResourcePath path) {
 		final XPathFactory xpathFac = XPathFactory.newInstance();
 		final XPath xpath = xpathFac.newXPath();
 
@@ -126,12 +126,12 @@ public final class DOMJaxRx implements JaxRx {
 	}
 
 	@Override
-	public String add(final InputStream input, final ResourcePath path) {
+	public synchronized String add(final InputStream input, final ResourcePath path) {
 	  return "Nothing done";
 	}
 
 	@Override
-	public String update(final InputStream input, final ResourcePath path) {
+	public synchronized String update(final InputStream input, final ResourcePath path) {
 		try {
 			final Document document = DocumentBuilderFactory.newInstance()
 					.newDocumentBuilder().parse(input);
