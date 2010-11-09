@@ -294,6 +294,10 @@ public class ClientBlackBoxTest {
 		code = connection.getResponseCode();
 		assertEquals("Test if the resource is now available ",
 				HttpURLConnection.HTTP_OK, code);
+		
+		final InputStream is = connection.getInputStream();
+		while(is.read() != -1);
+		
 		connection.disconnect();
 	}
 
