@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jaxrx</groupId>
 	<artifactId>jax-rx</artifactId>
 	<packaging>war</packaging>
 	<name>JAX-RX</name>
-	<version>1.2.7</version>
+	<version>1.2.8-SNAPSHOT</version>
 	<description>JAX-RX represents a thin REST-based interface layer to provide a unified access to XML databases and resources.</description>
 	<repositories>
 		<repository>
@@ -15,7 +16,7 @@
 		</repository>
 	</repositories>
 	<scm>
-    <connection>scm:svn:https://svn.uni-konstanz.de/dbis/basex/trunk/jax-rx</connection>
+		<connection>scm:svn:https://svn.uni-konstanz.de/dbis/basex/trunk/jax-rx</connection>
 		<developerConnection>scm:svn:https://svn.uni-konstanz.de/dbis/basex/trunk/jax-rx/</developerConnection>
 		<url>https://svn.uni-konstanz.de/dbis/basex/trunk/jax-rx/</url>
 	</scm>
@@ -105,6 +106,16 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
 			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
