@@ -12,7 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 import org.jaxrx.JaxRx;
@@ -32,6 +31,29 @@ import org.jaxrx.core.URLConstants;
  */
 @Path(URLConstants.RESOURCEPATH)
 public final class XMLResource extends AResource {
+  
+  
+  /**
+   * This method returns a collection of available resources. An available
+   * resource can be either a particular XML resource or a collection
+   * containing further XML resources.
+   * 
+   * @param system
+   *          The associated system with this request.
+   * @param resource
+   *          The name of the requested resource.
+   * @param uri
+   *          The context information due to the requested URI.
+   * @return A collection of available resources.
+   */
+  @GET
+  public Response getResource(
+      @PathParam(URLConstants.SYSTEM) final String system,
+      @PathParam(URLConstants.RESOURCE) final String resource,
+      @Context final UriInfo uri) {
+    return getResource(system, uri, resource);
+  }
+  
   /**
    * This method returns a collection of available resources. An available
    * resource can be either a particular XML resource or a collection
@@ -46,7 +68,7 @@ public final class XMLResource extends AResource {
    * 
    * @param sec The security context used for the request.
    * @return A collection of available resources.
-   */
+   *//*
   @GET
   public Response getResource(
       @PathParam(URLConstants.SYSTEM) final String system,
@@ -71,6 +93,7 @@ public final class XMLResource extends AResource {
     }
     return getResource(system, uri, resource);
   }
+  */
 
   /**
    * This method will be called when a HTTP client sends a POST request to an
