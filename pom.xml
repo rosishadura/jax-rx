@@ -6,7 +6,7 @@
 	<artifactId>jax-rx</artifactId>
 	<packaging>war</packaging>
 	<name>JAX-RX</name>
-	<version>1.2.8-SNAPSHOT</version>
+	<version>1.2.8</version>
 	<description>JAX-RX represents a thin REST-based interface layer to provide a unified access to XML databases and resources.</description>
 	<repositories>
 		<repository>
