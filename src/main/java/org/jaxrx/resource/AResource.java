@@ -198,10 +198,12 @@ abstract class AResource {
       // append multiple parameters
       final String old = newParams.get(ep);
       // skip multiple key/value combinations if different to OUTPUT
-      if(old != null && ep != QueryParameter.OUTPUT) return;
+      if(ep != QueryParameter.OUTPUT && ep != QueryParameter.VAR &&
+          old != null) return;
 
       // use \1 as delimiter for multiple values
-      newParams.put(ep, old == null ? value : old + ',' + value);
+      final char del = ep == QueryParameter.OUTPUT ? ',' : 0x01; 
+      newParams.put(ep, old == null ? value : old + del + value);
     } catch (final IllegalArgumentException ex) {
       throw new JaxRxException(400, "Parameter '" + key + "' is unknown.");
     }
