@@ -202,7 +202,7 @@ abstract class AResource {
           old != null) return;
 
       // use \1 as delimiter for multiple values
-      final char del = ep == QueryParameter.OUTPUT ? ',' : 0x01; 
+      final char del = ep == QueryParameter.OUTPUT ? ',' : 0x01;
       newParams.put(ep, old == null ? value : old + del + value);
     } catch (final IllegalArgumentException ex) {
       throw new JaxRxException(400, "Parameter '" + key + "' is unknown.");

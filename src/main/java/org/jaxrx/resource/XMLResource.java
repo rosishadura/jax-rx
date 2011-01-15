@@ -1,7 +1,6 @@
 package org.jaxrx.resource;
 
 import java.io.InputStream;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,7 +12,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
 import org.jaxrx.JaxRx;
 import org.jaxrx.core.ResourcePath;
 import org.jaxrx.core.Systems;
@@ -24,20 +22,20 @@ import org.jaxrx.core.URLConstants;
  * This means that JAX-RX returns the available resources which the underlying
  * implementation provide. Available resources could be collections or
  * particular XML resources.
- * 
+ *
  * @author Sebastian Graf, Christian Gruen, Lukas Lewandowski, University of
  *         Konstanz
- * 
+ *
  */
 @Path(URLConstants.RESOURCEPATH)
 public final class XMLResource extends AResource {
-  
-  
+
+
   /**
    * This method returns a collection of available resources. An available
    * resource can be either a particular XML resource or a collection
    * containing further XML resources.
-   * 
+   *
    * @param system
    *          The associated system with this request.
    * @param resource
@@ -53,19 +51,19 @@ public final class XMLResource extends AResource {
       @Context final UriInfo uri) {
     return getResource(system, uri, resource);
   }
-  
+
   /**
    * This method returns a collection of available resources. An available
    * resource can be either a particular XML resource or a collection
    * containing further XML resources.
-   * 
+   *
    * @param system
    *          The associated system with this request.
    * @param resource
    *          The name of the requested resource.
    * @param uri
    *          The context information due to the requested URI.
-   * 
+   *
    * @param sec The security context used for the request.
    * @return A collection of available resources.
    *//*
@@ -98,7 +96,7 @@ public final class XMLResource extends AResource {
   /**
    * This method will be called when a HTTP client sends a POST request to an
    * existing resource with 'application/query+xml' as Content-Type.
-   * 
+   *
    * @param system
    *          The implementation system.
    * @param resource
@@ -121,7 +119,7 @@ public final class XMLResource extends AResource {
   /**
    * This method will be called when an HTTP client sends a POST request to an
    * existing resource to add a resource. Content-Type must be 'text/xml'.
-   * 
+   *
    * @param system
    *          The implementation system.
    * @param resource
@@ -148,7 +146,7 @@ public final class XMLResource extends AResource {
    * the database. The user request will be forwarded to this method.
    * Afterwards it creates a response message with the 'created' HTTP status
    * code, if the storing has been successful.
-   * 
+   *
    * @param system
    *          The associated system with this request.
    * @param resource
@@ -172,7 +170,7 @@ public final class XMLResource extends AResource {
   /**
    * This method will be called when an HTTP client sends a DELETE request to
    * delete an existing resource.
-   * 
+   *
    * @param system
    *          The associated system with this request.
    * @param resource

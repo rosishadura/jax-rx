@@ -8,16 +8,15 @@ import org.mortbay.jetty.security.HashUserRealm;
 import org.mortbay.jetty.security.SecurityHandler;
 import org.mortbay.jetty.servlet.Context;
 import org.mortbay.jetty.servlet.ServletHolder;
-
 import com.sun.jersey.spi.container.servlet.ServletContainer;
 
 /**
  * This is the main class to start the Jetty server to offer RESTful web
  * services support.
- * 
+ *
  * @author Sebastian Graf, Christian Gruen, Patrick Lang, Lukas Lewandowski,
  *         University of Konstanz
- * 
+ *
  */
 public final class JettyServer {
   /**
@@ -27,7 +26,7 @@ public final class JettyServer {
 
   /**
    * Constructor.
-   * 
+   *
    * @param port
    *          web server port
    * @throws Exception
@@ -50,7 +49,7 @@ public final class JettyServer {
 
   /**
    * Constructor.
-   * 
+   *
    * @param port
    *          web server port
    * @param authentication <code>true</code> if server has to authenticate,
@@ -61,7 +60,7 @@ public final class JettyServer {
   public JettyServer(final int port, final boolean authentication)
       throws Exception {
     server = new Server(port);
-      
+
     // create a new constraint for authentication
     Constraint constraint = new Constraint();
     // choose possible authentication, e.g., Basic, Digest, Form, etc
