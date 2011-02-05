@@ -15,10 +15,10 @@ import javax.ws.rs.core.UriInfo;
 import org.jaxrx.JaxRx;
 import org.jaxrx.core.ResourcePath;
 import org.jaxrx.core.Systems;
-import org.jaxrx.core.URLConstants;
+import org.jaxrx.core.JaxRxConstants;
 
 /**
- * This class match HTTP requests for the {@link URLConstants#RESOURCEPATH}.
+ * This class match HTTP requests for the {@link JaxRxConstants#RESOURCEPATH}.
  * This means that JAX-RX returns the available resources which the underlying
  * implementation provide. Available resources could be collections or
  * particular XML resources.
@@ -27,7 +27,7 @@ import org.jaxrx.core.URLConstants;
  *         Konstanz
  *
  */
-@Path(URLConstants.RESOURCEPATH)
+@Path(JaxRxConstants.RESOURCEPATH)
 public final class XMLResource extends AResource {
 
 
@@ -46,52 +46,11 @@ public final class XMLResource extends AResource {
    */
   @GET
   public Response getResource(
-      @PathParam(URLConstants.SYSTEM) final String system,
-      @PathParam(URLConstants.RESOURCE) final String resource,
+      @PathParam(JaxRxConstants.SYSTEM) final String system,
+      @PathParam(JaxRxConstants.RESOURCE) final String resource,
       @Context final UriInfo uri) {
     return getResource(system, uri, resource);
   }
-
-  /**
-   * This method returns a collection of available resources. An available
-   * resource can be either a particular XML resource or a collection
-   * containing further XML resources.
-   *
-   * @param system
-   *          The associated system with this request.
-   * @param resource
-   *          The name of the requested resource.
-   * @param uri
-   *          The context information due to the requested URI.
-   *
-   * @param sec The security context used for the request.
-   * @return A collection of available resources.
-   *//*
-  @GET
-  public Response getResource(
-      @PathParam(URLConstants.SYSTEM) final String system,
-      @PathParam(URLConstants.RESOURCE) final String resource,
-      @Context final UriInfo uri, @Context final SecurityContext sec) {
-
-    if(sec != null) {
-
-      // the used security scheme (Basic, Digest, etc)
-      final String authChannel = sec.getAuthenticationScheme();
-      System.out.println("Authentication Scheme: " + authChannel);
-
-      // the authenticated user (authentication has been performed by server)
-      System.out.println("User principal: " + sec.getUserPrincipal().getName());
-
-      // this checks if the user is in a specific role, BUT unfortuntelly it is
-      // not working with Jetty, until now I have not found any workaround...
-      if(sec.isUserInRole("user")) {
-        System.out.println("User: " + sec.getUserPrincipal().getName()
-            + ", Go Baby Go!!! ");
-      }
-    }
-    return getResource(system, uri, resource);
-  }
-  */
 
   /**
    * This method will be called when a HTTP client sends a POST request to an
@@ -109,8 +68,8 @@ public final class XMLResource extends AResource {
   @POST
   @Consumes(APPLICATION_QUERY_XML)
   public Response postQuery(
-      @PathParam(URLConstants.SYSTEM) final String system,
-      @PathParam(URLConstants.RESOURCE) final String resource,
+      @PathParam(JaxRxConstants.SYSTEM) final String system,
+      @PathParam(JaxRxConstants.RESOURCE) final String resource,
       final InputStream input) {
 
     return postQuery(system, input, resource);
@@ -132,8 +91,8 @@ public final class XMLResource extends AResource {
   @POST
   @Consumes({ MediaType.TEXT_XML, MediaType.APPLICATION_XML})
   public Response postResource(
-      @PathParam(URLConstants.SYSTEM) final String system,
-      @PathParam(URLConstants.RESOURCE) final String resource,
+      @PathParam(JaxRxConstants.SYSTEM) final String system,
+      @PathParam(JaxRxConstants.RESOURCE) final String resource,
       final InputStream input) {
 
     final JaxRx impl = Systems.getInstance(system);
@@ -158,8 +117,8 @@ public final class XMLResource extends AResource {
   @PUT
   @Consumes({ MediaType.TEXT_XML, MediaType.APPLICATION_XML})
   public Response putResource(
-      @PathParam(URLConstants.SYSTEM) final String system,
-      @PathParam(URLConstants.RESOURCE) final String resource,
+      @PathParam(JaxRxConstants.SYSTEM) final String system,
+      @PathParam(JaxRxConstants.RESOURCE) final String resource,
       final InputStream xml) {
 
     final JaxRx impl = Systems.getInstance(system);
@@ -179,8 +138,8 @@ public final class XMLResource extends AResource {
    */
   @DELETE
   public Response deleteResource(
-      @PathParam(URLConstants.SYSTEM) final String system,
-      @PathParam(URLConstants.RESOURCE) final String resource) {
+      @PathParam(JaxRxConstants.SYSTEM) final String system,
+      @PathParam(JaxRxConstants.RESOURCE) final String resource) {
 
     final JaxRx impl = Systems.getInstance(system);
     final String info = impl.delete(new ResourcePath(resource));

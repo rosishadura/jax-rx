@@ -16,7 +16,7 @@ import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 import org.jaxrx.core.ResponseBuilder;
 import org.jaxrx.core.Systems;
-import org.jaxrx.core.URLConstants;
+import org.jaxrx.core.JaxRxConstants;
 
 /**
  * This class processes HTTP requests for the JAX-RX general URL part:
@@ -28,18 +28,18 @@ import org.jaxrx.core.URLConstants;
  *         Konstanz
  *
  */
-@Path(URLConstants.ROOTPATH)
+@Path(JaxRxConstants.ROOTPATH)
 public final class JaxRxResource extends AResource {
 	/**
 	 * This method waits for calls to the above specified URL
-	 * {@link URLConstants#ROOTPATH} and creates a response XML file containing
+	 * {@link JaxRxConstants#ROOTPATH} and creates a response XML file containing
 	 * the available further resources. In our case it is just the
-	 * {@link URLConstants#SYSTEMPATH} resource.
+	 * {@link JaxRxConstants#SYSTEMPATH} resource.
 	 *
 	 * @return The available resources according to the URL path.
 	 */
 	@GET
-	@Produces(MediaType.TEXT_XML)
+	@Produces(MediaType.APPLICATION_XML)
 	public StreamingOutput getRoot() {
 		final List<String> resources = new ArrayList<String>();
 		resources.addAll(Systems.getSystems().keySet());
@@ -48,23 +48,23 @@ public final class JaxRxResource extends AResource {
 
 	/**
 	 * This method waits for calls to the specified URL
-	 * {@link URLConstants#SYSTEMPATH} and creates a response XML file
+	 * {@link JaxRxConstants#SYSTEMPATH} and creates a response XML file
 	 * containing the available further resources. In our case it just the
-	 * {@link URLConstants#JAXRXPATH} resource.
+	 * {@link JaxRxConstants#JAXRXPATH} resource.
 	 *
 	 * @param system
 	 *            The associated system with this request.
 	 * @return The available resources resources according to the URL path.
 	 */
-	@Path(URLConstants.SYSTEMPATH)
+	@Path(JaxRxConstants.SYSTEMPATH)
 	@GET
-	@Produces(MediaType.TEXT_XML)
+	@Produces(MediaType.APPLICATION_XML)
 	public StreamingOutput getSystem(
-			@PathParam(URLConstants.SYSTEM) final String system) {
+			@PathParam(JaxRxConstants.SYSTEM) final String system) {
 
 		Systems.getInstance(system);
 		final List<String> resources = new ArrayList<String>();
-		resources.add(URLConstants.JAXRX);
+		resources.add(JaxRxConstants.JAXRX);
 		return ResponseBuilder.buildDOMResponse(resources);
 	}
 
@@ -79,10 +79,10 @@ public final class JaxRxResource extends AResource {
 	 *            The context information due to the requested URI.
 	 * @return The available resources resources according to the URL path.
 	 */
-	@Path(URLConstants.JAXRXPATH)
+	@Path(JaxRxConstants.JAXRXPATH)
 	@GET
 	public Response getResource(
-			@PathParam(URLConstants.SYSTEM) final String system,
+			@PathParam(JaxRxConstants.SYSTEM) final String system,
 			@Context final UriInfo uri) {
 
     return getResource(system, uri, "");
@@ -99,11 +99,11 @@ public final class JaxRxResource extends AResource {
 	 * @return The {@link Response} which can be empty when no response is
 	 *         expected. Otherwise it holds the response XML file.
 	 */
-	@Path(URLConstants.JAXRXPATH)
+	@Path(JaxRxConstants.JAXRXPATH)
 	@POST
 	@Consumes(APPLICATION_QUERY_XML)
 	public Response postQuery(
-			@PathParam(URLConstants.SYSTEM) final String system,
+			@PathParam(JaxRxConstants.SYSTEM) final String system,
 			final InputStream input) {
 
 	  return postQuery(system, input, "");

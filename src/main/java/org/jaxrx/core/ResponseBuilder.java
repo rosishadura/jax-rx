@@ -60,7 +60,7 @@ public final class ResponseBuilder {
 		final List<Element> collections = new ArrayList<Element>();
 		for (final String path : pathResource) {
 			final Element collection = document.createElementNS(
-					URLConstants.URL, URLConstants.JAXRX + ":resource");
+					JaxRxConstants.URL, JaxRxConstants.JAXRX + ":resource");
 			collection.setAttribute("name", path);
 			collections.add(collection);
 		}
@@ -75,7 +75,7 @@ public final class ResponseBuilder {
 	 * @return The created XML {@link Element}.
 	 */
 	private static Element createResultElement(final Document document) {
-		return document.createElementNS(URLConstants.URL, URLConstants.JAXRX
+		return document.createElementNS(JaxRxConstants.URL, JaxRxConstants.JAXRX
 				+ ":results");
 	}
 

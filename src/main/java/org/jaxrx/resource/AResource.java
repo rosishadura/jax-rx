@@ -1,9 +1,11 @@
 package org.jaxrx.resource;
 
+import static org.jaxrx.core.JaxRxConstants.*;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.Set;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -82,11 +84,32 @@ abstract class AResource {
 	Response createResponse(final JaxRx impl, final ResourcePath path) {
 		final StreamingOutput out = createOutput(impl, path);
 
-		final boolean wrap = path.getValue(QueryParameter.WRAP) == null
-				|| path.getValue(QueryParameter.WRAP).equals("yes");
+		// change media type, dependent on WRAP value
+		final boolean wrap = path.getValue(QueryParameter.WRAP) == null ||
+      path.getValue(QueryParameter.WRAP).equals("yes");
+    String type = wrap ? MediaType.APPLICATION_XML : MediaType.TEXT_PLAIN;
 
-		final String type = wrap ? MediaType.TEXT_XML : MediaType.TEXT_PLAIN;
-		return Response.ok(out, type).build();
+    // overwrite type if METHOD or MEDIA-TYPE parameters are specified
+    final Scanner sc = new Scanner(path.getValue(QueryParameter.OUTPUT));
+    sc.useDelimiter(",");
+    while(sc.hasNext()) {
+      String[] sp = sc.next().split("=", 2);
+      if(sp.length == 1) continue;
+      if(sp[0].equals(METHOD)) {
+        for(final String[] m : METHODS) if(sp[1].equals(m[0])) type = m[1];
+      } else if(sp[0].equals(MEDIATYPE)) {
+        type = sp[1];
+      }
+    }
+
+    // check validity of media type
+    MediaType mt = null;
+    try {
+      mt = MediaType.valueOf(type);
+    } catch(final IllegalArgumentException ex) {
+      throw new JaxRxException(400, ex.getMessage());
+    }
+		return Response.ok(out, mt).build();
 
 	}
 
@@ -118,9 +141,8 @@ abstract class AResource {
 
 	/**
 	 * Extracts and returns query parameters, variables, and output options
-	 * from the specified document instance. The names, values, and optional
-	 * data types of variables are separated with the special character code
-	 * {@code '\2'}.
+	 * from the specified document instance. The keys and values of variables
+	 * are separated with the control code {@code '\2'}.
 	 *
 	 * @param doc
 	 *            The XML {@link Document} containing the XQuery XML post

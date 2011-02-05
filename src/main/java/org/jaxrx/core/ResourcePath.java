@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
  * @author Sebastian Graf, Christian Gruen, Lukas Lewandowski, University of
  *         Konstanz
  */
-@Path(URLConstants.ROOTPATH)
+@Path(JaxRxConstants.ROOTPATH)
 public final class ResourcePath {
   /** Query parameters. */
   private final Map<QueryParameter, String> params;
