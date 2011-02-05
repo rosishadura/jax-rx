@@ -90,15 +90,18 @@ abstract class AResource {
     String type = wrap ? MediaType.APPLICATION_XML : MediaType.TEXT_PLAIN;
 
     // overwrite type if METHOD or MEDIA-TYPE parameters are specified
-    final Scanner sc = new Scanner(path.getValue(QueryParameter.OUTPUT));
-    sc.useDelimiter(",");
-    while(sc.hasNext()) {
-      String[] sp = sc.next().split("=", 2);
-      if(sp.length == 1) continue;
-      if(sp[0].equals(METHOD)) {
-        for(final String[] m : METHODS) if(sp[1].equals(m[0])) type = m[1];
-      } else if(sp[0].equals(MEDIATYPE)) {
-        type = sp[1];
+    final String op = path.getValue(QueryParameter.OUTPUT);
+    if(op != null) {
+      final Scanner sc = new Scanner(op);
+      sc.useDelimiter(",");
+      while(sc.hasNext()) {
+        String[] sp = sc.next().split("=", 2);
+        if(sp.length == 1) continue;
+        if(sp[0].equals(METHOD)) {
+          for(final String[] m : METHODS) if(sp[1].equals(m[0])) type = m[1];
+        } else if(sp[0].equals(MEDIATYPE)) {
+          type = sp[1];
+        }
       }
     }
 
