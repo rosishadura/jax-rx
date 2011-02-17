@@ -1,0 +1,10 @@
+BaseX offers a RESTful API for accessing distributed XML resources.
+REST ([http://en.wikipedia.org/wiki/Representational_State_Transfer REpresentational State Transfer])
+facilitates a simple and fast access to databases through HTTP.
+The HTTP methods GET, PUT, DELETE, and POST can be applied to
+interact with the database. The REST implementation is based on
+[http://jax-rx.sourceforge.net JAX-RX], an interface layer to
+provide unified access to XML databases and resources.
+JAX-RX uses the HTTP Server [http://jetty.codehaus.org/jetty Jetty].
+
+
